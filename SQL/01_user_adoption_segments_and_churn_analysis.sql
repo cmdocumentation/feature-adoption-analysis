@@ -56,13 +56,13 @@ SELECT
     
   -- Adoption Segment Classification
 	CASE 
-    WHEN time_to_value <= 7 
-     AND feature_breadth >= 3 
-     AND documentation_viewed = 1 
-    THEN 'High Adoption'
-    ELSE 'Low Adoption'
+    	WHEN time_to_value <= 7 
+     	 AND feature_breadth >= 3 
+     	 AND documentation_viewed = 1 
+    	THEN 'High Adoption'
+    	ELSE 'Low Adoption'
     -- Note: Users with NULL time_to_value (no core actions) fall into Low Adoption
-END AS adoption_segment,
+	END AS adoption_segment,
     
     -- 30-day retention flags
     CASE 
