@@ -48,7 +48,7 @@ High-adoption users show 15% churn; low-adoption users show 80% churn. Tier 4 ha
 
 Drop-off rates at each step: signed up → created report → explored support → invited team member.
 
-![Feature Adoption Drop-off by Plan Tier](./assets/Product_Adoption_and_Business_Analysis.png)
+![Feature Adoption Drop-off by Plan Tier](./assets/Product_Adoption_and_Business_Impact_Analysis.png)
 
 ---
 
