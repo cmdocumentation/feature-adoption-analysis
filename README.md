@@ -58,7 +58,7 @@ Drop-off rates at each step: signed up → created report → explored support �
 
 ### Data Foundation
 
-Synthetic dataset built with Mockaroo and Excel:
+Synthetic dataset built with [https://www.mockaroo.com/](Mockaroo) and Excel:
 
 - **users table:** user_id, signup_date, churn_date, plan_tier (1–4), status (active/canceled)
 - **user_events table:** event_id, user_id, event_date, event_type (created_report, invited_team_member, viewed_help_docs)
