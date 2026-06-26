@@ -1,7 +1,7 @@
 # SaaS Feature Adoption and Churn Analysis
 
 A data analysis portfolio project investigating the relationship between 
-early feature adoption and 30-day user retention in a B2B SaaS product.
+early feature adoption and 30-day user retention in a B2B SaaS product using synthetic data.
 
 ## Project Overview
 
@@ -11,7 +11,7 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 **The Central Question:** Do users who adopt features early stay longer?
 
-**The Answer:** **Yes—dramatically. High-adoption users have 15% lower churn at day 30 compared to low-adoption users (15% vs. 80% churn).**
+**The Answer:** Yes, dramatically. High-adoption users have 15% lower churn at day 30 compared to low-adoption users (15% vs. 80% churn).
 
 ---
 
