@@ -31,7 +31,7 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 ### Cohort Retention Heatmap
 
-Retention rates (day 7→90) for high adoption vs. low adoption cohorts, segmented by signup cohort.
+Retention rates (day 7→90) for high adoption vs. low adoption cohorts.
 
 ![Cohort Retention Heatmaps](./assets/Cohort_Retention_Heatmaps.png)
 
