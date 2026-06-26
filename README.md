@@ -12,11 +12,7 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 **The Central Question:** Do users who adopt features early stay longer?
 
-**The Answer:** Yes. High-adoption users have 15% lower churn at day 30 compared to low-adoption users (15% vs. 80% churn).
-
-### Data Context: Plan Tiers
-
-The dataset includes four subscription tiers: Tier 1 (entry-level) through Tier 4 (highest-value customers).
+**The Answer:** Yes. High-adoption users have 15% lower churn at day 30 compared to low-adoption users (15% vs. 80% churn), and this pattern holds across all four subscription tiers (Tier 1 entry-level through Tier 4 highest-value customers).
 
 ---
 
