@@ -32,7 +32,7 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 Retention trajectories (day 7→90) for high adoption vs. low adoption cohorts, segmented by signup cohort.
 
-![Cohort Retention Heatmap](./assets/cohort_retention_heatmap.png)
+![Cohort Retention Heatmap](./assets/Cohort Retention Heatmaps.png)
 
 ---
 
