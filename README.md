@@ -47,7 +47,7 @@ High-adoption users show 15% churn and low-adoption users show 88% churn. Tier 4
 
 ### Feature Adoption Funnel by Plan Tier
 
-Drop-off rates at each step: signed up → created report → explored support → invited team member.
+Drop-off rates at each step: signed up → created report → exported report → invited team member.
 
 ![Feature Adoption Drop-off by Plan Tier](./assets/Product_Adoption_and_Business_Impact_Analysis.png)
 
