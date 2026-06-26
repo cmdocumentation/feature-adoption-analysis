@@ -32,7 +32,7 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 Retention trajectories (day 7→90) for high adoption vs. low adoption cohorts, segmented by signup cohort.
 
-![Cohort Retention Heatmap](./assets/Cohort Retention Heatmaps.png)
+![Cohort Retention Heatmaps](./assets/Cohort_Retention_Heatmaps.png)
 
 ---
 
@@ -48,7 +48,7 @@ High-adoption users show 15% churn; low-adoption users show 80% churn. Tier 4 ha
 
 Drop-off rates at each step: signed up → created report → explored support → invited team member.
 
-![Feature Adoption Drop-off by Plan Tier](./assets/feature_adoption_funnel.png)
+![Feature Adoption Drop-off by Plan Tier](./assets/Product_Adoption_and_Business_Analysis.png)
 
 ---
 
