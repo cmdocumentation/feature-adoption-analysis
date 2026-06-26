@@ -60,7 +60,7 @@ Drop-off rates at each step: signed up → created report → exported report �
 Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
 
 - **users table:** user_id, signup_date, churn_date, plan_tier (1–4), status (active/canceled)
-- **user_events table:** event_id, user_id, event_date, event_type (created_report, invited_team_member, viewed_help_docs)
+- **user_events table:** event_id, user_id, event_date, event_type (updated_settings, created_report, ran_dashboard_export, imported_report, applied_filter, invited_team_member, viewed_help_docs)
 
 ### SQL Transformation
 
