@@ -40,7 +40,7 @@ Retention rates (day 7→90) for high adoption vs. low adoption cohorts, segment
 
 ### 30-Day Churn Rate by Adoption Segment and Plan Tier
 
-High-adoption users show 15% churn and low-adoption users show 80% churn. Tier 4 has the lowest overall churn (7%) but the steepest adoption drop-off.
+High-adoption users show 15% churn and low-adoption users show 88% churn. Tier 4 has the lowest overall churn (7%).
 
 ![30-Day Churn by Adoption & Plan Tier](./assets/30-Day_Churn_by_Adoption_Tier.png)
 
