@@ -1,7 +1,9 @@
 # SaaS Feature Adoption and Churn Analysis
 
 A data analysis portfolio project investigating the relationship between 
-early feature adoption and 30-day user retention in a B2B SaaS product using synthetic data.
+early feature adoption and 30-day user retention in a B2B SaaS product.
+
+Note: This project uses synthetic data.
 
 ## Project Overview
 
@@ -36,9 +38,9 @@ Retention trajectories (day 7→90) for high adoption vs. low adoption cohorts, 
 
 ---
 
-### 30-Day Churn Rate by Adoption Segment & Plan Tier
+### 30-Day Churn Rate by Adoption Segment and Plan Tier
 
-High-adoption users show 15% churn; low-adoption users show 80% churn. Tier 4 has the lowest overall churn (7%) but the steepest adoption drop-off.
+High-adoption users show 15% churn and low-adoption users show 80% churn. Tier 4 has the lowest overall churn (7%) but the steepest adoption drop-off.
 
 ![30-Day Churn by Adoption & Plan Tier](./assets/30Day_Churn_by_Adoption_Tier.png)
 
