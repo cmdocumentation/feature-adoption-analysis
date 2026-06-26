@@ -42,7 +42,7 @@ Retention trajectories (day 7→90) for high adoption vs. low adoption cohorts, 
 
 High-adoption users show 15% churn and low-adoption users show 80% churn. Tier 4 has the lowest overall churn (7%) but the steepest adoption drop-off.
 
-![30-Day Churn by Adoption & Plan Tier](./assets/30Day_Churn_by_Adoption_Tier.png)
+![30-Day Churn by Adoption & Plan Tier](./assets/30-Day_Churn_by_Adoption_Tier.png)
 
 ---
 
