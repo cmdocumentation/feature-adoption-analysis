@@ -83,8 +83,8 @@ See [01_user_adoption_segments.sql](./SQL/01_user_adoption_segments.sql) for the
 ### Tableau Dashboards
 
 - **Cohort Retention Heatmap**: Week-over-week retention by signup cohort and adoption segment
-- **30-Day Churn Analysis**: Comparison of adoption segments and plan tiers
-- **Feature Adoption Funnel**: Drop-off rates by plan tier
+- **30-Day Churn Rate by Adoption Segment and Plan Tier**: Comparison of adoption segments and plan tiers
+- **Feature Adoption Funnel by Plan Tier**: Drop-off rates by plan tier
 
 ---
 
