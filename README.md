@@ -183,16 +183,4 @@ Possible explanation for the data:
 
 ## Repository Structure
 
-README.md
-SQL/
-  01_user_adoption_segments.sql
-  02_user_adoption_segments_churn.sql
-  03_cohort_retention_matrix.sql
-  04_feature_adoption_funnel.sql
-data/
-  users.csv
-  user_events.csv
-assets/
-  30-Day_Churn_by_Adoption_Tier.png
-  Cohort_Retention_Heatmaps.png
-  Product_Adoption_and_Business_Impact_Analysis.png
+The repository includes a synthetic dataset (users.csv, user_events.csv), four SQL queries that calculate adoption segments and retention metrics, and three Tableau visualizations exported as PNGs.
