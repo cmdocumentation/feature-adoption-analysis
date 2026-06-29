@@ -35,7 +35,7 @@ High-adoption users show 15% churn and low-adoption users show 88% churn. Tier 4
 
 ![30-Day Churn by Adoption & Plan Tier](./assets/30-Day_Churn_by_Adoption_Tier.png)
 
-Data Source: [User Adoption Segments with 30/60/90-Day Churn Rates](./SQL/02_user_adoption_segments_churn.sql)
+Data Source: [02_user_adoption_segments_churn.sql](./SQL/02_user_adoption_segments_churn.sql)
 
 ---
 
@@ -45,7 +45,7 @@ Retention rates (day 7→90) for high adoption vs. low adoption cohorts, segment
 
 ![Cohort Retention Heatmaps](./assets/Cohort_Retention_Heatmaps.png)
 
-Data Source: [Cohort Retention Matrix](./SQL/03_cohort_retention_matrix.sql)
+Data Source: [03_cohort_retention_matrix.sql](./SQL/03_cohort_retention_matrix.sql)
 
 ---
 
@@ -54,6 +54,8 @@ Data Source: [Cohort Retention Matrix](./SQL/03_cohort_retention_matrix.sql)
 Drop-off rates at each step: signed up → created report → exported report → invited team member.
 
 ![Feature Adoption Drop-off by Plan Tier](./assets/Product_Adoption_and_Business_Impact_Analysis.png)
+
+Data Source: [04_feature_adoption_funnel.sql](./SQL/04_feature_adoption_funnel.sql)
 
 ---
 
@@ -145,12 +147,9 @@ In Tiers 1–3, adoption rates and churn rates move together: high adoption → 
 
 In Tier 4, they diverge: low adoption → low churn.
 
-Possible explanations for the data:
-- **Contract lock-in:** Enterprise customers are contractually committed, so they don't churn even if disengaged
-- **Different use case:** Enterprise buyers may have been sold on a specific (non-report) feature
-- **Longer sales cycle:** Enterprise customers may still be in implementation and haven't reached "self-serve" usage yet
-- **Data limitation:** Small sample size for Tier 4 may create statistical noise
-
+Possible explanation for the data:
+- **Selection effect and contract structure:** Tier 4 buyers are vetted by sales and contractually committed, so early feature adoption is less predictive of their 30-day churn.
+  
 **What This Does NOT Tell Us**
 - Whether Tier 4 customers are *satisfied* (we only see churn, not NPS or renewal intent)
 - Why adoption is lower (could be onboarding, product fit, or just account maturity stage)
@@ -162,46 +161,38 @@ Possible explanations for the data:
 
 **Observation 1: Early Feature Adoption Predicts 30-Day Retention**
 - High-adoption users: 15% churn
-- Low-adoption users: 80% churn
+- Low-adoption users: 88% churn
 - The data shows a strong correlation between multi-feature engagement and staying past day 30
 
 **Observation 2: The Tier 4 Paradox Suggests Contract Structure Matters**
 - Enterprise customers don't churn even with low feature adoption
-- This could mean contract lock-in masks actual disengagement
-- Or it could mean enterprise onboarding/use cases differ from SMB products
+- This suggests contract lock-in and sales vetting reduce churn pressure in the first 30 days, making early feature adoption a less reliable retention signal for Tier 4
 
 **Observation 3: Team Invitations Are the Leakiest Funnel Stage**
-- Only 10-17% of users across all tiers invite teammates
-- This is the lowest adoption rate among core actions
-- Could indicate friction, permission/license constraints, or unclear value
+- Only 10–12% of users across all tiers invite teammates. This is the lowest adoption rate among core actions.
+- The steep drop-off indicates either product friction or intentional access controls - a constraint worth validating with product and support teams.
 
 ---
 
 ## Questions for Further Analysis
 
 - Does the Tier 4 churn rate hold after day 90? (Is the paradox short-term or sustained?)
-- What percentage of Tier 4 users are still in "implementation" phase during the first 30 days?
-- How do usage patterns differ between Tier 4 adopters (43%) and non-adopters (57%)?
-- Are team invitations blocked by license limits, or is adoption driven by user intent?
+- How do usage patterns differ between Tier 4 users who created reports (43%) and those who didn't (57%)?
 
 ---
 
 ## Repository Structure
 
-├── README.md
-├── assumptions.md
-├── sql/
-│   └── user_activity_profile.sql
-├── data/
-│   ├── users.csv
-│   └── user_events.csv
-├── assets/
-│   ├── cohort_retention_heatmap.png
-│   ├── 30day_churn_by_adoption_tier.png
-│   └── feature_adoption_funnel.png
-└── dashboards/
-├── cohort_retention_heatmap.twbx
-├── 30day_churn_by_adoption.twbx
-└── feature_adoption_funnel.twbx
-
-
+README.md
+SQL/
+  01_user_adoption_segments.sql
+  02_user_adoption_segments_churn.sql
+  03_cohort_retention_matrix.sql
+  04_feature_adoption_funnel.sql
+data/
+  users.csv
+  user_events.csv
+assets/
+  30-Day_Churn_by_Adoption_Tier.png
+  Cohort_Retention_Heatmaps.png
+  Product_Adoption_and_Business_Impact_Analysis.png
