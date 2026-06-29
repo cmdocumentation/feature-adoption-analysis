@@ -1,4 +1,4 @@
--- Query 1: User Adoption Segments
+-- Query 1: User Adoption Segments (Used in 30-Day Churn Rate by Adoption Segment and Plan Tier Tableau)
 -- Purpose: Segment users by early adoption behavior and measure 30-day retention
 -- Business Question: Do users who adopt features early stay longer?
 -- ==============================================================================
