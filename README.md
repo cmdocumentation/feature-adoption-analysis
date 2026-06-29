@@ -45,6 +45,8 @@ Retention rates (day 7→90) for high adoption vs. low adoption cohorts, segment
 
 ![Cohort Retention Heatmaps](./assets/Cohort_Retention_Heatmaps.png)
 
+Data Source: [Cohort Retention Matrix](./SQL/03_cohort_retention_matrix.sql)
+
 ---
 
 ### Feature Adoption Funnel by Plan Tier
