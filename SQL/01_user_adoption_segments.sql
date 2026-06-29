@@ -10,7 +10,7 @@ WITH user_metrics AS (
         u.status,
         
         -- Time-to-Value: Days from signup to first core action
-		    -- JULIANDAY() returns the Julian day number; subtracting two gives elapsed days
+		-- JULIANDAY() returns the Julian day number; subtracting two gives elapsed days
         CAST((
             JULIANDAY(
                 MIN(CASE 
@@ -49,13 +49,13 @@ SELECT
     plan_tier,
     status,
     
-  -- Adoption Segment Classification
+    -- Adoption Segment Classification
 	CASE 
-    	WHEN time_to_value <= 7 
-     	 AND feature_breadth >= 3 
-     	 AND documentation_viewed = 1 
-    	THEN 'High Adoption'
-    	ELSE 'Low Adoption'
+		WHEN time_to_value <= 7 
+		AND feature_breadth >= 3 
+		AND documentation_viewed = 1 
+		THEN 'High Adoption'
+		ELSE 'Low Adoption'
     -- Note: Users with NULL time_to_value (no core actions) fall into Low Adoption
 	END AS adoption_segment,
     
@@ -71,7 +71,7 @@ SELECT
     CASE 
         WHEN churn_date IS NOT NULL 
         THEN CAST((JULIANDAY(churn_date) - JULIANDAY(signup_date)) AS INTEGER)
-        ELSE CAST((JULIANDAY('2025-05-21') - JULIANDAY(signup_date)) AS INTEGER)
+        ELSE CAST((JULIANDAY('2025-05-28') - JULIANDAY(signup_date)) AS INTEGER)
     END AS days_active,
     
     -- Raw metrics (for transparency)
