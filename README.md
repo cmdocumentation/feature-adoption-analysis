@@ -10,10 +10,6 @@ A data analysis portfolio project investigating the relationship between early f
 
 A high-growth B2B SaaS company faces a critical question: Why do users churn after 30 days? The hypothesis is straightforward: users who don't adopt core features or engage with onboarding materials leave first.
 
-**The Central Question:** Do users who adopt features early stay longer?
-
-**The Answer:** Yes. High-adoption users have 15% lower churn at day 30 compared to low-adoption users (15% vs. 80% churn), and this pattern holds across all four subscription tiers (Tier 1 entry-level through Tier 4 highest-value customers).
-
 ---
 
 ## Key Findings
@@ -31,7 +27,9 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 ### 30-Day Churn Rate by Adoption Segment and Plan Tier
 
-High-adoption users show 15% churn and low-adoption users show 88% churn. Tier 4 has the lowest overall churn (low adoption users have 7% and high adoption users have 0%).
+High-adoption users show 15% churn and low-adoption users show 88% churn. 
+
+Tier 4 has the lowest overall churn (7% for low-adoption users, 0% for high-adoption users).
 
 ![30-Day Churn by Adoption & Plan Tier](./assets/30-Day_Churn_by_Adoption_Tier.png)
 
@@ -51,7 +49,7 @@ Data Source: [03_cohort_retention_matrix.sql](./SQL/03_cohort_retention_matrix.s
 
 ### Feature Adoption Funnel by Plan Tier
 
-Drop-off rates at each step: signed up → created report → exported report → invited team member.
+Drop-off rates at each step: signed up → created report → exported report → invited team member. Only 10–12% invite teammates.
 
 ![Feature Adoption Drop-off by Plan Tier](./assets/Product_Adoption_and_Business_Impact_Analysis.png)
 
@@ -86,51 +84,45 @@ LOW_ADOPTION = Everyone else
 
 See [01_user_adoption_segments.sql](./SQL/01_user_adoption_segments.sql) for the full query.
 
-### Tableau Dashboards
-
-- **30-Day Churn Rate by Adoption Segment and Plan Tier**: Comparison of adoption segments and plan tiers
-- **Cohort Retention Heatmap**: Week-over-week retention by signup cohort and adoption segment
-- **Feature Adoption Funnel by Plan Tier**: Drop-off rates by plan tier
-
 ---
 
-## Assumptions and Design Decisions
+# Design Rationale
 
-**Core Actions:** **created_report** and **invited_team_member** represent independent value (reporting) and expansion potential (team growth).
+## Why These Metrics Matter
 
-**14-Day Window:** Feature breadth is measured in the first 14 days - the period when behavioral patterns stabilize and early engagement becomes predictive of sustained platform usage.
+Early feature adoption is a leading indicator of long-term retention in B2B SaaS. But "adoption" is vague. We operationalized it using three measurable signals that together identify genuinely engaged users:
 
-**Documentation Interaction:** A user who views help documentation signals proactive engagement and is flagged as higher-intent than users who never access help resources.
+### Time-to-Value (TTV): Days from signup to first core action
 
-**High-Adoption Threshold:** All three conditions must be met to isolate the most engaged cohort for comparison against everyone else.
+- Users who reach their first core action within 7 days demonstrate early engagement momentum
+- Beyond 7 days, activation typically fades. This aligns with industry benchmarks for onboarding window length
+- TTV alone doesn't guarantee sustained engagement, but it's a necessary first signal
 
-**Synthetic Data:** Enables demonstration of SQL transformation, window functions, and analytical storytelling without proprietary data constraints.
+### Feature Breadth: Count of distinct features used in first 14 days
 
-### Why These Metrics?
-
-**Time-to-Value (TTV) ≤ 7 Days**
-- Users who reach their first core action within a week demonstrate early engagement
-- Beyond 7 days, activation momentum typically fades in B2B SaaS
-- This aligns with industry benchmarks for onboarding window length
-
-**Feature Breadth ≥ 3 Distinct Features**
 - Single-feature users rarely stay (they solve one problem and leave)
-- Three features signal broader product exploration and value discovery
-- Avoids false positives from users who stumble onto one feature by accident
+- Three features signal genuine product exploration, not accidental discovery
+- 14-day window chosen because behavioral patterns stabilize by this point - engagement becomes predictive of sustained platform usage
 
-**Documentation Interaction (Binary Flag)**
-- Self-directed help-seeking indicates investment in the product
-- Users who view docs have lower support burden and faster ramp
+### Documentation Interaction: Binary flag (viewed help docs = 1, else 0)
+
+- Self-directed help-seeking indicates investment in mastering the product
+- Users who view docs typically have lower support burden and faster ramp
 - Distinguishes active learners from passive or frustrated users
 
-### Why High-Adoption Threshold Uses AND Logic
+## Why All Three Conditions Together (AND Logic)
 
-All three conditions must be met because:
-- Time-to-Value (TTV) alone doesn't guarantee sustained engagement
-- Breadth alone could reflect accidental discovery rather than intentional exploration
-- Documentation alone doesn't guarantee feature use
+Each metric alone is incomplete:
 
-Together, they identify users who actively *engaged* with the product, not just users who happened to take one action.
+- TTV alone misses users who take one action and disappear
+- Breadth alone could reflect accidental clicks rather than intentional exploration
+- Documentation alone doesn't confirm feature use
+
+Combined, they isolate users who actively engaged with the product across multiple dimensions - not just users who happened to take one action.
+
+## Design Choice: Synthetic Data
+
+This project uses synthetic data. This choice enables demonstration of SQL transformation, window functions, and analytical storytelling without proprietary data constraints. The logic and insights generalize to real-world SaaS datasets.
 
 ---
 
@@ -139,16 +131,11 @@ Together, they identify users who actively *engaged* with the product, not just 
 **The Pattern**
 - Tier 4 (enterprise) has the lowest churn rate at 7%
 - But only 43% of Tier 4 users create a report - lower than all other tiers (48-52%)
-- This contradicts the strong correlation between feature adoption and retention seen in Tiers 1–3
+- In Tiers 1–3, adoption and churn move together; in Tier 4, they diverge
 
 **What This Suggests**
 
-In Tiers 1–3, adoption rates and churn rates move together: high adoption → low churn.
-
-In Tier 4, they diverge: low adoption → low churn.
-
-Possible explanation for the data:
-- **Selection effect and contract structure:** Tier 4 buyers are vetted by sales and contractually committed, so early feature adoption is less predictive of their 30-day churn.
+Selection effect and contract structure likely explain the divergence. Tier 4 buyers are vetted by sales and contractually committed, so early feature adoption is less predictive of their 30-day churn.
   
 **What This Does NOT Tell Us**
 - Whether Tier 4 customers are *satisfied* (we only see churn, not NPS or renewal intent)
@@ -165,12 +152,12 @@ Possible explanation for the data:
 - The data shows a strong correlation between multi-feature engagement and staying past day 30
 
 **Observation 2: The Tier 4 Paradox Suggests Contract Structure Matters**
-- Enterprise customers don't churn even with low feature adoption
-- This suggests contract lock-in and sales vetting reduce churn pressure in the first 30 days, making early feature adoption a less reliable retention signal for Tier 4
+- Enterprise customers don't churn even with low feature adoption.
+- This suggests contract lock-in and sales vetting reduce churn pressure in the first 30 days, making early feature adoption a less reliable retention signal for Tier 4.
 
 **Observation 3: Team Invitations Are the Leakiest Funnel Stage**
-- Only 10–12% of users across all tiers invite teammates. This is the lowest adoption rate among core actions.
-- The steep drop-off indicates either product friction or intentional access controls - a constraint worth validating with product and support teams.
+- Only 10–12% of users across all tiers invite teammates - the lowest adoption rate among all core actions. This steep drop-off indicates either product friction or intentional access controls (e.g., feature gates, license limits).
+- Why this matters for retention: If team invitations are a key expansion signal (users bringing others on board), then the low adoption rate here may explain why so many "low-adoption" users churn. They never cross from individual user to team advocate. Validating this constraint with product and support teams could unlock a high-impact retention lever.
 
 ---
 
