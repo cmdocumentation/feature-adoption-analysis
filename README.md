@@ -64,7 +64,7 @@ Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
 
 ### SQL Transformation
 
-Built a User Activity Profile using CTEs and window functions to calculate three retention predictors:
+Built user adoption segments using CTEs and window functions to calculate three retention predictors:
 
 **Key Metrics**
 
