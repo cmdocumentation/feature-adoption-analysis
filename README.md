@@ -75,10 +75,10 @@ Built user adoption segments using CTEs and window functions to calculate three 
 **Segmentation Logic**
 ```
 HIGH_ADOPTION = (TTV ≤ 7 days) AND (Feature_Breadth ≥ 3) AND (Viewed_Docs = 1)
-LOW_ADOPTION = Everything else
+LOW_ADOPTION = Everyone else
 ```
 
-See [user_activity_profile.sql](./sql/user_activity_profile.sql) for the full query.
+See [01_user_adoption_segments.sql](./SQL/01_user_adoption_segments.sql) for the full query.
 
 ### Tableau Dashboards
 
@@ -88,31 +88,31 @@ See [user_activity_profile.sql](./sql/user_activity_profile.sql) for the full qu
 
 ---
 
-## Assumptions & Design Decisions
+## Assumptions and Design Decisions
 
 **Core Actions:** **created_report** and **invited_team_member** represent independent value (reporting) and expansion potential (team growth).
 
-**14-Day Window:** Feature breadth is measured in the first 14 days - the critical onboarding window where users typically reach (or don't reach) their aha moment.
+**14-Day Window:** Feature breadth is measured in the first 14 days - the period when behavioral patterns stabilize and early engagement becomes predictive of sustained platform usage.
 
-**Documentation Interaction:** A user who views help docs signals proactive engagement and is flagged as higher-intent than users who never access help resources.
+**Documentation Interaction:** A user who views help documentation signals proactive engagement and is flagged as higher-intent than users who never access help resources.
 
-**High-Adoption Threshold:** All three conditions must be met (AND logic) to isolate the most engaged cohort for comparison against everyone else.
+**High-Adoption Threshold:** All three conditions must be met to isolate the most engaged cohort for comparison against everyone else.
 
-**Synthetic Data:** Real customer data introduces privacy concerns. Synthetic data demonstrates SQL and visualization skills without requiring proprietary access.
+**Synthetic Data:** Enables demonstration of SQL transformation, window functions, and analytical storytelling without proprietary data constraints.
 
 ### Why These Metrics?
 
-**Time-to-Value (TTV) ≤ 7 days**
+**Time-to-Value (TTV) ≤ 7 Days**
 - Users who reach their first core action within a week demonstrate early engagement
 - Beyond 7 days, activation momentum typically fades in B2B SaaS
 - This aligns with industry benchmarks for onboarding window length
 
-**Feature Breadth ≥ 3 distinct features**
+**Feature Breadth ≥ 3 Distinct Features**
 - Single-feature users rarely stay (they solve one problem and leave)
 - Three features signal broader product exploration and value discovery
 - Avoids false positives from users who stumble onto one feature by accident
 
-**Documentation Interaction (binary flag)**
+**Documentation Interaction (Binary Flag)**
 - Self-directed help-seeking indicates investment in the product
 - Users who view docs have lower support burden and faster ramp
 - Distinguishes active learners from passive or frustrated users
@@ -120,9 +120,9 @@ See [user_activity_profile.sql](./sql/user_activity_profile.sql) for the full qu
 ### Why High-Adoption Threshold Uses AND Logic
 
 All three conditions must be met because:
-- **TTV alone** doesn't guarantee feature adoption (early action ≠ sustained engagement)
-- **Breadth alone** doesn't guarantee docs weren't needed (lucky discovery ≠ intentional learning)
-- **Docs alone** doesn't guarantee feature use (research ≠ execution)
+- Time-to-Value (TTV) alone doesn't guarantee sustained engagement
+- Breadth alone could reflect accidental discovery rather than intentional exploration
+- Documentation alone doesn't guarantee feature use
 
 Together, they identify users who actively *engaged* with the product, not just users who happened to take one action.
 
