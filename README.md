@@ -73,22 +73,24 @@ Built a User Activity Profile using CTEs and window functions to calculate three
 - **Documentation Interaction:** Binary flag (viewed help docs = 1, else 0)
 
 **Segmentation Logic**
+```
 HIGH_ADOPTION = (TTV ≤ 7 days) AND (Feature_Breadth ≥ 3) AND (Viewed_Docs = 1)
 LOW_ADOPTION = Everything else
+```
 
 See [user_activity_profile.sql](./sql/user_activity_profile.sql) for the full query.
 
 ### Tableau Dashboards
 
-- **Cohort Retention Heatmap** – Week-over-week retention by signup cohort and adoption segment
-- **30-Day Churn Analysis** – Comparison of adoption segments and plan tiers
-- **Feature Adoption Funnel** – Drop-off rates by plan tier
+- **Cohort Retention Heatmap**: Week-over-week retention by signup cohort and adoption segment
+- **30-Day Churn Analysis**: Comparison of adoption segments and plan tiers
+- **Feature Adoption Funnel**: Drop-off rates by plan tier
 
 ---
 
 ## Assumptions & Design Decisions
 
-**Core Actions:** "created_report" and "invited_team_member" represent independent value (reporting) and expansion potential (team growth).
+**Core Actions:** **created_report** and **invited_team_member** represent independent value (reporting) and expansion potential (team growth).
 
 **14-Day Window:** Feature breadth is measured in the first 14 days - the critical onboarding window where users typically reach (or don't reach) their aha moment.
 
