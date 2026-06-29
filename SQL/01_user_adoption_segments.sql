@@ -1,10 +1,5 @@
 -- Query 1: User Adoption Segments (High/Low Cohorts)
--- Purpose: Segment users by early adoption behavior and measure 30-day retention
--- Business Question: Do users who adopt features early stay longer?
--- ==============================================================================
--- High Adoption Definition: TTV ≤ 7 days AND Feature Breadth ≥ 3 AND Viewed Docs
--- Low Adoption: Everyone else
--- Output: User-level adoption segment + churn flags for retention analysis
+-- Output: User signup, churn date, plan tier (1-4), status (active/cancelled), adoption segment (high/low), days active, and 30-day churn flags
 
 WITH user_metrics AS (
     SELECT 
