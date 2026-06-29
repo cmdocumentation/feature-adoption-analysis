@@ -1,4 +1,4 @@
--- Query 1: User Adoption Segments and Churn Analysis
+-- Query 1: User Adoption Segments
 -- Purpose: Segment users by early adoption behavior and measure 30-day retention
 -- Business Question: Do users who adopt features early stay longer?
 -- ==============================================================================
