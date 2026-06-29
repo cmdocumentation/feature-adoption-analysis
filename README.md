@@ -35,7 +35,7 @@ High-adoption users show 15% churn and low-adoption users show 88% churn. Tier 4
 
 ![30-Day Churn by Adoption & Plan Tier](./assets/30-Day_Churn_by_Adoption_Tier.png)
 
-Data Source: [User Adoption Segments with 30/60/90-Day Churn Rates](./SQL/02_adoption_segments_churn_rates.sql)
+Data Source: [User Adoption Segments with 30/60/90-Day Churn Rates](./SQL/02_user_adoption_segments_churn.sql)
 
 ---
 
