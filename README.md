@@ -29,19 +29,19 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 ## Dashboard Results
 
-### Cohort Retention Heatmap
-
-Retention rates (day 7→90) for high adoption vs. low adoption cohorts, segmented by signup week.
-
-![Cohort Retention Heatmaps](./assets/Cohort_Retention_Heatmaps.png)
-
----
-
 ### 30-Day Churn Rate by Adoption Segment and Plan Tier
 
 High-adoption users show 15% churn and low-adoption users show 88% churn. Tier 4 has the lowest overall churn (low adoption users have 7% and high adoption users have 0%).
 
 ![30-Day Churn by Adoption & Plan Tier](./assets/30-Day_Churn_by_Adoption_Tier.png)
+
+---
+
+### Cohort Retention Heatmap
+
+Retention rates (day 7→90) for high adoption vs. low adoption cohorts, segmented by signup week.
+
+![Cohort Retention Heatmaps](./assets/Cohort_Retention_Heatmaps.png)
 
 ---
 
@@ -82,8 +82,8 @@ See [01_user_adoption_segments.sql](./SQL/01_user_adoption_segments.sql) for the
 
 ### Tableau Dashboards
 
-- **Cohort Retention Heatmap**: Week-over-week retention by signup cohort and adoption segment
 - **30-Day Churn Rate by Adoption Segment and Plan Tier**: Comparison of adoption segments and plan tiers
+- **Cohort Retention Heatmap**: Week-over-week retention by signup cohort and adoption segment
 - **Feature Adoption Funnel by Plan Tier**: Drop-off rates by plan tier
 
 ---
