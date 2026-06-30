@@ -47,13 +47,15 @@ Data Source: [03_cohort_retention_matrix.sql](./SQL/03_cohort_retention_matrix.s
 
 ---
 
-### Feature Adoption Funnel by Plan Tier
+### Feature Adoption Rates from Baseline by Plan Tier
 
-Drop-off rates at each step: signed up → created report → exported report → invited team member. Only 10–12% invite teammates.
+Counts and percentage of the total signup cohort that ever successfully activates each core feature within 30 days. 
 
-![Feature Adoption Drop-off by Plan Tier](./assets/Product_Adoption_and_Business_Impact_Analysis.png)
+Across all tiers, a maximum of 3.4% of cohorts engage with the team member invitation feature.
 
-Data Source: [04_feature_adoption_funnel.sql](./SQL/04_feature_adoption_funnel.sql)
+![Feature Activation Rates by Baseline and Tier](./assets/Feature_Activation_Rates.png)
+
+Data Source: [04_feature_adoption_rates.sql](./SQL/04_feature_adoption_rates.sql)
 
 ---
 
@@ -68,18 +70,17 @@ Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
 
 ### SQL Transformation
 
-Built user adoption segments using CTEs and window functions to calculate three retention predictors:
+Built user adoption segments using CTEs and window functions to calculate two retention predictors:
 
 **Key Metrics**
 
 - **Time-to-Value (TTV):** Days from signup to first core action
 - **Feature Breadth:** Count of distinct features used in first 14 days
-- **Documentation Interaction:** Binary flag (viewed help docs = 1, else 0)
 
 **Segmentation Logic**
 ```
-HIGH_ADOPTION = (TTV ≤ 7 days) AND (Feature_Breadth ≥ 3) AND (Viewed_Docs = 1)
-LOW_ADOPTION = Everyone else
+HIGH_ADOPTION = (TTV ≤ 7 days) AND (Feature_Breadth ≥ 3)
+LOW_ADOPTION  = Everyone else
 ```
 
 See [01_user_adoption_segments.sql](./SQL/01_user_adoption_segments.sql) for the full query.
@@ -104,19 +105,12 @@ Early feature adoption is a leading indicator of long-term retention in B2B SaaS
 - Three features signal genuine product exploration, not accidental discovery
 - 14-day window chosen because behavioral patterns stabilize by this point - engagement becomes predictive of sustained platform usage
 
-### Documentation Interaction: Binary flag (viewed help docs = 1, else 0)
-
-- Self-directed help-seeking indicates investment in mastering the product
-- Users who view docs typically have lower support burden and faster ramp
-- Distinguishes active learners from passive or frustrated users
-
 ## Why All Three Conditions Together (AND Logic)
 
 Each metric alone is incomplete:
 
 - TTV alone misses users who take one action and disappear
 - Breadth alone could reflect accidental clicks rather than intentional exploration
-- Documentation alone doesn't confirm feature use
 
 Combined, they isolate users who actively engaged with the product across multiple dimensions - not just users who happened to take one action.
 
@@ -155,9 +149,8 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 - Enterprise customers don't churn even with low feature adoption.
 - This suggests contract lock-in and sales vetting reduce churn pressure in the first 30 days, making early feature adoption a less reliable retention signal for Tier 4.
 
-**Observation 3: Team Invitations Are the Leakiest Funnel Stage**
-- Only 10–12% of users across all tiers invite teammates - the lowest adoption rate among all core actions. This steep drop-off indicates either product friction or intentional access controls (e.g., feature gates, license limits).
-- Why this matters for retention: If team invitations are a key expansion signal (users bringing others on board), then the low adoption rate here may explain why so many "low-adoption" users churn. They never cross from individual user to team advocate. Validating this constraint with product and support teams could unlock a high-impact retention lever.
+**Observation 3: The "Invited Team Member" Bottleneck is a Catastrophe**
+- A healthy B2B collaboration platform typically looks for a 15% to 25% team adoption rate within 30 days. We see an absolute collapse in viral feature adoption: fewer than 4% of total users across all tiers ever successfully invite a teammate, indicating the platform is operating purely as a siloed, single-user tool.
 
 ---
 
