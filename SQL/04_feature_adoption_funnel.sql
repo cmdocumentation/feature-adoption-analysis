@@ -1,45 +1,53 @@
--- Query 4: Feature Adoption Funnel (30-Day Window)
--- Output: Step-by-step user counts and conversion % by plan tier (signup → created report → exported report → invited team member → viewed help docs)
+-- Query 4: Feature Adoption Rates
+-- Purpose: Measures pure, independent adoption rates for key product features within a user's first 30 days, broken down by Plan Tier and calculated relative to the total signup baseline.
 
-WITH funnel_steps AS (
+WITH user_milestones AS (
+    -- Step 1: Flag the first time a user completes each step within 30 days
+    -- Note: Removed the sequential dependencies (AND did_report = 1) so you get pure, 
+    -- independent adoption rates for each feature from the signup baseline.
     SELECT 
         u.plan_tier,
-        CASE ue.event_type
-            WHEN 'created_report' THEN 'Created Report'
-            WHEN 'ran_dashboard_export' THEN 'Exported Report'
-            WHEN 'invited_team_member' THEN 'Invited Team Member'
-            WHEN 'viewed_help_docs' THEN 'Viewed Help Docs'
-        END AS step_name,
-        CASE ue.event_type
-            WHEN 'created_report' THEN 2
-            WHEN 'ran_dashboard_export' THEN 3
-            WHEN 'invited_team_member' THEN 4
-            WHEN 'viewed_help_docs' THEN 5
-        END AS step_order,
-        COUNT(DISTINCT u.user_id) AS count
+        u.user_id,
+        MAX(CASE WHEN ue.event_type = 'created_report' THEN 1 ELSE 0 END) AS did_report,
+        MAX(CASE WHEN ue.event_type = 'ran_dashboard_export' THEN 1 ELSE 0 END) AS did_export,
+        MAX(CASE WHEN ue.event_type = 'invited_team_member' THEN 1 ELSE 0 END) AS did_invite,
+        MAX(CASE WHEN ue.event_type = 'viewed_help_docs' THEN 1 ELSE 0 END) AS did_docs
     FROM users u
     LEFT JOIN user_events ue ON u.user_id = ue.user_id
         AND ue.event_date <= DATE(u.signup_date, '+30 days')
-        AND ue.event_type IN ('created_report', 'ran_dashboard_export', 'invited_team_member', 'viewed_help_docs')
-    GROUP BY u.plan_tier, ue.event_type
-
+    GROUP BY u.plan_tier, u.user_id
+),
+funnel_tallies AS (
+    -- Step 2: Total up the raw counts for each milestone
+    SELECT plan_tier, 'Signed Up' AS step_name, 1 AS step_order, COUNT(DISTINCT user_id) AS count FROM user_milestones GROUP BY plan_tier
     UNION ALL
-
+    SELECT plan_tier, 'Created Report', 2, COUNT(DISTINCT CASE WHEN did_report = 1 THEN user_id END) FROM user_milestones GROUP BY plan_tier
+    UNION ALL
+    SELECT plan_tier, 'Exported Report', 3, COUNT(DISTINCT CASE WHEN did_export = 1 THEN user_id END) FROM user_milestones GROUP BY plan_tier
+    UNION ALL
+    SELECT plan_tier, 'Invited Team Member', 4, COUNT(DISTINCT CASE WHEN did_invite = 1 THEN user_id END) FROM user_milestones GROUP BY plan_tier
+    UNION ALL
+    SELECT plan_tier, 'Viewed Help Docs', 5, COUNT(DISTINCT CASE WHEN did_docs = 1 THEN user_id END) FROM user_milestones GROUP BY plan_tier
+),
+baseline_counts AS (
+    -- Step 3: Use FIRST_VALUE to grab the 'Signed Up' count (step_order = 1) for each tier
     SELECT 
-        u.plan_tier,
-        'Signed Up' AS step_name,
-        1 AS step_order,
-        COUNT(DISTINCT u.user_id) AS count
-    FROM users u
-    GROUP BY u.plan_tier
+        plan_tier,
+        step_name,
+        count,
+        step_order,
+        FIRST_VALUE(count) OVER (PARTITION BY plan_tier ORDER BY step_order) AS signup_baseline
+    FROM funnel_tallies
 )
-
+-- Step 4: Calculate the pure adoption rate relative to total signups
 SELECT 
     plan_tier,
     step_name,
     count,
     step_order,
-    ROUND(100.0 * count / LAG(count) OVER (PARTITION BY plan_tier ORDER BY step_order), 1) AS pct_of_prev_step
-FROM funnel_steps
-WHERE step_name IS NOT NULL
+    CASE 
+        WHEN step_order = 1 THEN 100.0 -- The baseline is always 100%
+        ELSE ROUND(100.0 * count / signup_baseline, 1)
+    END AS pure_adoption_rate_pct
+FROM baseline_counts
 ORDER BY plan_tier, step_order;
