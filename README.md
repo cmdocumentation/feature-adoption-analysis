@@ -105,7 +105,7 @@ Early feature adoption is a leading indicator of long-term retention in B2B SaaS
 - Three features signal genuine product exploration, not accidental discovery
 - 14-day window chosen because behavioral patterns stabilize by this point - engagement becomes predictive of sustained platform usage
 
-## Why All Three Conditions Together (AND Logic)
+## Why Two Conditions Together (AND Logic)
 
 Each metric alone is incomplete:
 
