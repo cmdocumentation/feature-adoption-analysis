@@ -8,7 +8,7 @@ A data analysis portfolio project investigating the relationship between early f
 
 **The Business Problem**
 
-A high-growth B2B SaaS company faces a critical question: Why do users churn after 30 days? The hypothesis is straightforward: users who don't adopt core features or engage with onboarding materials leave first.
+A high-growth B2B SaaS company faces a critical question: Why do users churn after 30 days? The hypothesis is straightforward: users who don't adopt core features leave first.
 
 ---
 
