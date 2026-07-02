@@ -15,14 +15,14 @@ WITH user_activity_profile AS (
         CAST((
             JULIANDAY(
                 MIN(CASE 
-                    WHEN ue.event_type IN ('created_report', 'invited_team_member') 
+                    WHEN ue.event_type IN ('created_report', 'invited_team_member', 'ran_dashboard_export', 'imported_report') 
                     THEN ue.event_date 
                 END)
             ) - JULIANDAY(u.signup_date)
         ) AS INTEGER) AS time_to_value,
         
         -- FEATURE BREADTH: Count of distinct features used in first 14 days
-        -- High breadth (3+ features) indicates the user explored the product
+        -- High breadth (4+ features) indicates the user explored the product
         COUNT(DISTINCT 
             CASE 
                 WHEN ue.event_date <= DATE(u.signup_date, '+14 days')
@@ -57,8 +57,7 @@ adoption_segments AS (
         -- "High Adoption" users show strong early engagement patterns
         CASE 
             WHEN time_to_value <= 7 
-             AND feature_breadth >= 3 
-             AND documentation_viewed = 1 
+             AND feature_breadth >= 4 
             THEN 'High Adoption'
             ELSE 'Low Adoption'
         END AS adoption_segment,
