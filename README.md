@@ -16,7 +16,7 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 | Finding | Insight | Data Impact |
 |---------|---------|-------------|
-| High-adoption users churn at 15% | Users who adopt ≥3 distinct features within 14 days + view documentation = strong retention signal | Feature adoption is a measurable predictor of 30-day retention |
+| High-adoption users churn at 16% | Users who adopt ≥4 distinct features within 14 days = strong retention signal | Feature adoption is a measurable predictor of 30-day retention |
 | Tier 4 paradox: 7% churn, 43% report creation adoption | High-value customers show lowest churn but steepest adoption drop-off | Users on the enterprise tier (Tier 4) show low churn (7%) regardless of whether they adopt core features early - unlike lower tiers, where early adoption strongly predicts retention |
 | Cohort retention stability in high-adoption group | Retention flatlines near 100% through day 90 for high adopters | Early feature adoption creates sustained retention |
 | Feature breadth matters more than individual actions | Users who try multiple core features stay longer than single-feature users | Multiple feature adoption is a stronger signal than any single action |
@@ -27,7 +27,7 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 ### 30-Day Churn Rate by Adoption Segment and Plan Tier
 
-High-adoption users show 15% churn and low-adoption users show 88% churn. 
+High-adoption users show 16% churn and low-adoption users show 87% churn. 
 
 Tier 4 has the lowest overall churn (7% for low-adoption users, 0% for high-adoption users).
 
@@ -79,7 +79,7 @@ Built user adoption segments using CTEs and window functions to calculate two re
 
 **Segmentation Logic**
 ```
-HIGH_ADOPTION = (TTV ≤ 7 days) AND (Feature_Breadth ≥ 3)
+HIGH_ADOPTION = (TTV ≤ 7 days) AND (Feature_Breadth ≥ 4)
 LOW_ADOPTION  = Everyone else
 ```
 
@@ -112,7 +112,7 @@ Each metric alone is incomplete:
 - TTV alone misses users who take one action and disappear
 - Breadth alone could reflect accidental clicks rather than intentional exploration
 
-Combined, they isolate users who actively engaged with the product across multiple dimensions - not just users who happened to take one action.
+Combined, they isolate users who actively engaged with the product across these two dimensions - not just users who happened to take one action.
 
 ## Design Choice: Synthetic Data
 
@@ -141,8 +141,8 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 ## Key Observations
 
 **Observation 1: Early Feature Adoption Predicts 30-Day Retention**
-- High-adoption users: 15% churn
-- Low-adoption users: 88% churn
+- High-adoption users: 16% churn
+- Low-adoption users: 87% churn
 - The data shows a strong correlation between multi-feature engagement and staying past day 30
 
 **Observation 2: The Tier 4 Paradox Suggests Contract Structure Matters**
