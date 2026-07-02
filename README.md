@@ -91,7 +91,7 @@ See [01_user_adoption_segments.sql](./SQL/01_user_adoption_segments.sql) for the
 
 ## Why These Metrics Matter
 
-Early feature adoption is a leading indicator of long-term retention in B2B SaaS. But "adoption" is vague. We operationalized it using three measurable signals that together identify genuinely engaged users:
+This project operationalizes the concept using three measurable signals that together identify genuinely engaged users:
 
 ### Time-to-Value (TTV): Days from signup to first core action
 
