@@ -1,5 +1,5 @@
 -- Query 4: Feature Adoption Rates
--- Purpose: Measures pure, independent adoption rates for key product features within a user's first 30 days, broken down by Plan Tier and calculated relative to the total signup baseline.
+-- Purpose: Measures adoption rates for key product features within a user's first 30 days, broken down by Plan Tier and calculated relative to the total signup baseline.
 
 WITH user_milestones AS (
     -- Step 1: Flag the first time a user completes each step within 30 days
