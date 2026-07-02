@@ -12,7 +12,7 @@ WITH user_metrics AS (
         CAST((
             JULIANDAY(
                 MIN(CASE 
-                    WHEN ue.event_type IN ('created_report', 'invited_team_member') 
+                    WHEN ue.event_type IN ('created_report', 'invited_team_member', 'ran_dashboard_export', 'imported_report') 
                     THEN ue.event_date 
                 END)
             ) - JULIANDAY(u.signup_date)
@@ -46,8 +46,7 @@ user_cohorts AS (
         
         CASE 
             WHEN time_to_value <= 7 
-             AND feature_breadth >= 3 
-             AND documentation_viewed = 1 
+             AND feature_breadth >= 4 
             THEN 'High Adoption'
             ELSE 'Low Adoption'
         END AS adoption_segment,
@@ -111,4 +110,3 @@ SELECT
 FROM cohort_retention
 
 ORDER BY signup_week, adoption_segment, sort_order;
-
