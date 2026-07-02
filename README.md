@@ -17,8 +17,8 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 | Finding | Insight | Data Impact |
 |---------|---------|-------------|
 | High-adoption users churn at 16% | Users who adopt ≥4 distinct features within 14 days = strong retention signal | Feature adoption is a measurable predictor of 30-day retention |
-| Tier 4 paradox: 7% churn, 43% report creation adoption | High-value customers show lowest churn but steepest adoption drop-off | Users on the enterprise tier (Tier 4) show low churn (7%) regardless of whether they adopt core features early - unlike lower tiers, where early adoption strongly predicts retention |
-| Cohort retention stability in high-adoption group | Retention flatlines near 100% through day 90 for high adopters | Early feature adoption creates sustained retention |
+| Tier 4 paradox: 7% churn, 27% report creation adoption | High-value customers show lowest churn but steepest adoption drop-off | Users on the enterprise tier (Tier 4) show low churn (7%) regardless of whether they adopt core features early - unlike lower tiers, where early adoption strongly predicts retention |
+| Cohort retention stability in high-adoption group | High adopters churn slower than low adopters and the gap widens over time | Early feature adoption creates sustained retention |
 | Feature breadth matters more than individual actions | Users who try multiple core features stay longer than single-feature users | Multiple feature adoption is a stronger signal than any single action |
 
 ---
@@ -91,7 +91,7 @@ See [01_user_adoption_segments.sql](./SQL/01_user_adoption_segments.sql) for the
 
 ## Why These Metrics Matter
 
-This project operationalizes the concept using three measurable signals that together identify genuinely engaged users:
+Early feature adoption is a leading indicator of long-term retention in B2B SaaS. But "adoption" is vague. This project operationalizes the concept using two measurable signals that together identify genuinely engaged users:
 
 ### Time-to-Value (TTV): Days from signup to first core action
 
@@ -124,7 +124,7 @@ This project uses synthetic data. This choice enables demonstration of SQL trans
 
 **The Pattern**
 - Tier 4 (enterprise) has the lowest churn rate at 7%
-- But only 43% of Tier 4 users create a report - lower than all other tiers (48-52%)
+- But only 27% of Tier 4 users create a report - lower than all other tiers (40-43%)
 - In Tiers 1–3, adoption and churn move together; in Tier 4, they diverge
 
 **What This Suggests**
@@ -157,7 +157,7 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 ## Questions for Further Analysis
 
 - Does the Tier 4 churn rate hold after day 90? (Is the paradox short-term or sustained?)
-- How do usage patterns differ between Tier 4 users who created reports (43%) and those who didn't (57%)?
+- How do usage patterns differ between Tier 4 users who created reports (27%) and those who didn't (73%)?
 
 ---
 
