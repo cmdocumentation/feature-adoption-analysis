@@ -14,7 +14,7 @@ WITH user_metrics AS (
         CAST((
             JULIANDAY(
                 MIN(CASE 
-                    WHEN ue.event_type IN ('created_report', 'invited_team_member') 
+                    WHEN ue.event_type IN ('created_report', 'invited_team_member', 'ran_dashboard_export', 'imported_report') 
                     THEN ue.event_date 
                 END)
             ) - JULIANDAY(u.signup_date)
@@ -52,8 +52,7 @@ SELECT
     -- Adoption Segment Classification
 	CASE 
 		WHEN time_to_value <= 7 
-		AND feature_breadth >= 3 
-		AND documentation_viewed = 1 
+		AND feature_breadth >= 4 
 		THEN 'High Adoption'
 		ELSE 'Low Adoption'
     -- Note: Users with NULL time_to_value (no core actions) fall into Low Adoption
