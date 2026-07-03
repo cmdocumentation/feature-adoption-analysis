@@ -1,10 +1,8 @@
 -- Query 4: Feature Adoption Rates
--- Purpose: Measures adoption rates for key product features within a user's first 30 days, broken down by Plan Tier and calculated relative to the total signup baseline.
+-- Purpose: Measures adoption rates for key product features within a user's first 30 days, broken down by plan tier (1-4) and calculated relative to the total signup baseline
 
 WITH user_milestones AS (
     -- Step 1: Flag the first time a user completes each step within 30 days
-    -- Note: Removed the sequential dependencies (AND did_report = 1) so you get pure, 
-    -- independent adoption rates for each feature from the signup baseline.
     SELECT 
         u.plan_tier,
         u.user_id,
@@ -39,7 +37,7 @@ baseline_counts AS (
         FIRST_VALUE(count) OVER (PARTITION BY plan_tier ORDER BY step_order) AS signup_baseline
     FROM funnel_tallies
 )
--- Step 4: Calculate the pure adoption rate relative to total signups
+-- Step 4: Calculate the feature adoption rate relative to total signups
 SELECT 
     plan_tier,
     step_name,
