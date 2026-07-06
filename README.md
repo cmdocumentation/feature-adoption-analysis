@@ -68,7 +68,7 @@ Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
 - **users table:** user_id, signup_date, churn_date, plan_tier (1–4), status (active/canceled)
 - **user_events table:** event_id, user_id, event_date, event_type (updated_settings, created_report, ran_dashboard_export, imported_report, applied_filter, invited_team_member, viewed_help_docs)
 
-### SQL Transformation
+### SQL (Postgres) Transformation
 
 Built user adoption segments using CTEs and window functions to calculate two retention predictors:
 
@@ -163,4 +163,4 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 
 ## Repository Structure
 
-The repository includes a synthetic dataset (users.csv, user_events.csv), four SQL queries that calculate adoption segments and retention metrics, and three Tableau visualizations exported as PNGs.
+The repository includes a synthetic dataset (users.csv, user_events.csv), four SQL (Postgres) queries that calculate adoption segments and retention metrics, and three Tableau visualizations exported as PNGs.
