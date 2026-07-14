@@ -17,7 +17,7 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 | Finding | Insight | Data Impact |
 |---------|---------|-------------|
 | High adoption users churn at 16% | Users who adopt ≥4 distinct features within 14 days = strong retention signal | Feature adoption is a measurable predictor of 30-day retention |
-| Tier 4 paradox: 7% churn for low adopters, 27% report creation adoption overall | High-value (Tier 4) customers show lowest churn but steepest adoption drop-off | Users on the enterprise tier (Tier 4) show low churn (0-7%) regardless of whether they adopt core features early - unlike lower tiers, where early adoption strongly predicts retention |
+| Tier 4 paradox: 7% low adoption churn, 0% high adoption churn, yet 27% report creation adoption overall | Enterprise contracts mask adoption risk: both segments show low 30-day churn, but early adoption still predicts outcome. Real risk likely appears in renewal or satisfaction metrics. | Adoption-churn link holds across all tiers, but 30-day churn may be too coarse a metric to detect Tier 4 adoption risk. |
 | Cohort retention stability in high adoption group | High adopters churn slower than low adopters and the gap widens over time | Early feature adoption creates sustained retention |
 | Feature breadth matters more than individual actions | Users who try multiple core features stay longer than single-feature users | Multiple feature adoption is a stronger signal than any single action |
 
