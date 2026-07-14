@@ -33,7 +33,7 @@ Tier 4 has the lowest overall churn (7% for low adoption users, 0% for high adop
 
 ![30-Day Churn by Adoption & Plan Tier](./assets/30-Day_Churn_by_Adoption_Tier.png)
 
-Data Source: [02_user_adoption_segments_churn.sql](./SQL/02_user_adoption_segments_churn.sql)
+Data Source: [01_user_adoption_segments_churn.sql](./SQL/01_user_adoption_segments_churn.sql)
 
 ---
 
@@ -45,7 +45,7 @@ High adopters churn slower than low adopters and the gap widens over time.
 
 ![Cohort Retention Heatmaps](./assets/Cohort_Retention_Heatmaps.png)
 
-Data Source: [03_cohort_retention_matrix.sql](./SQL/03_cohort_retention_matrix.sql)
+Data Source: [02_cohort_retention_matrix.sql](./SQL/02_cohort_retention_matrix.sql)
 
 ---
 
@@ -57,7 +57,7 @@ Across all tiers, a maximum of 3% of cohorts engage with the team member invitat
 
 ![Feature Activation Rates by Baseline and Tier](./assets/Feature_Activation_Rates.png)
 
-Data Source: [04_feature_adoption_rates.sql](./SQL/04_feature_adoption_rates.sql)
+Data Source: [03_feature_adoption_rates.sql](./SQL/03_feature_adoption_rates.sql)
 
 ---
 
@@ -72,8 +72,6 @@ Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
 
 ### SQL (Postgres) Transformation
 
-Built user adoption segments using CTEs and JOIN functions to calculate two retention predictors:
-
 **Key Metrics**
 
 - **Time-to-Value (TTV):** Days from signup to first core action
@@ -81,11 +79,19 @@ Built user adoption segments using CTEs and JOIN functions to calculate two rete
 
 **Segmentation Logic**
 ```
-HIGH_ADOPTION = (TTV ≤ 7 days) AND (Feature_Breadth ≥ 4)
-LOW_ADOPTION  = Everyone else
+High Adoption = (TTV ≤ 7 days) AND (Feature Breadth ≥ 4 within 14 days)
+Low Adoption = Everyone else
 ```
+Where:
+- Time-to-Value (TTV): days from signup to first core action
+- Feature Breadth: count of distinct core features used within first 14 days of signup
+- Core features: created_report, ran_dashboard_export, imported_report, invited_team_member
 
-See [01_user_adoption_segments.sql](./SQL/01_user_adoption_segments.sql) for the full query.
+### SQL Techniques
+
+- **CTEs with JOINs:** Connect user lifecycle events to signup/churn data for TTV and breadth calculations
+- **Temporal Filtering:** 7-day and 14-day event windows to capture early engagement signals
+- **Window Function (FIRST_VALUE):** Segment feature adoption by tier, isolating adoption patterns from plan-tier effects
 
 ---
 
