@@ -53,7 +53,7 @@ Data Source: [03_cohort_retention_matrix.sql](./SQL/03_cohort_retention_matrix.s
 
 Counts and percentage of the total signup cohort that ever successfully activates each core feature within 30 days. 
 
-Across all tiers, a maximum of 3.4% of cohorts engage with the team member invitation feature.
+Across all tiers, a maximum of 3% of cohorts engage with the team member invitation feature.
 
 ![Feature Activation Rates by Baseline and Tier](./assets/Feature_Activation_Rates.png)
 
