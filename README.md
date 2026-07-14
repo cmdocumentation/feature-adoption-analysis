@@ -72,7 +72,7 @@ Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
 
 ### SQL (Postgres) Transformation
 
-Built user adoption segments using CTEs and window functions to calculate two retention predictors:
+Built user adoption segments using CTEs and JOIN functions to calculate two retention predictors:
 
 **Key Metrics**
 
