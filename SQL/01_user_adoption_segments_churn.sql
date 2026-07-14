@@ -1,4 +1,4 @@
--- Query 2: User Adoption Segments with 30/60/90-Day Churn Rates
+-- Query 1: User Adoption Segments with 30/60/90-Day Churn Rates
 -- Output: Churn rates by plan tier (1-4), adoption segment (high vs. low), and time period (30/60/90 days)
 
 WITH first_core_action AS (
