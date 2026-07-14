@@ -16,9 +16,9 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 | Finding | Insight | Data Impact |
 |---------|---------|-------------|
-| High-adoption users churn at 16% | Users who adopt ≥4 distinct features within 14 days = strong retention signal | Feature adoption is a measurable predictor of 30-day retention |
-| Tier 4 paradox: 7% churn, 27% report creation adoption | High-value customers show lowest churn but steepest adoption drop-off | Users on the enterprise tier (Tier 4) show low churn (7%) regardless of whether they adopt core features early - unlike lower tiers, where early adoption strongly predicts retention |
-| Cohort retention stability in high-adoption group | High adopters churn slower than low adopters and the gap widens over time | Early feature adoption creates sustained retention |
+| High adoption users churn at 16% | Users who adopt ≥4 distinct features within 14 days = strong retention signal | Feature adoption is a measurable predictor of 30-day retention |
+| Tier 4 paradox: 7% churn for low adopters, 27% report creation adoption overall | High-value (Tier 4) customers show lowest churn but steepest adoption drop-off | Users on the enterprise tier (Tier 4) show low churn (0-7%) regardless of whether they adopt core features early - unlike lower tiers, where early adoption strongly predicts retention |
+| Cohort retention stability in high adoption group | High adopters churn slower than low adopters and the gap widens over time | Early feature adoption creates sustained retention |
 | Feature breadth matters more than individual actions | Users who try multiple core features stay longer than single-feature users | Multiple feature adoption is a stronger signal than any single action |
 
 ---
@@ -27,9 +27,9 @@ A high-growth B2B SaaS company faces a critical question: Why do users churn aft
 
 ### 30-Day Churn Rate by Adoption Segment and Plan Tier
 
-High-adoption users show 16% churn and low-adoption users show 87% churn. 
+High adoption users show 16% churn and low adoption users show 87% churn. 
 
-Tier 4 has the lowest overall churn (7% for low-adoption users, 0% for high-adoption users).
+Tier 4 has the lowest overall churn (7% for low adoption users, 0% for high adoption users).
 
 ![30-Day Churn by Adoption & Plan Tier](./assets/30-Day_Churn_by_Adoption_Tier.png)
 
@@ -123,9 +123,9 @@ This project uses synthetic data. This choice enables demonstration of SQL trans
 ## The Tier 4 Paradox: What the Data Reveals
 
 **The Pattern**
-- Tier 4 (enterprise) has the lowest churn rate at 7%
-- But only 27% of Tier 4 users create a report - lower than all other tiers (40-43%)
-- In Tiers 1–3, adoption and churn move together; in Tier 4, they diverge
+- Tier 4 (enterprise) has the lowest churn rate at 0-7% (high and low adoption users)
+- But only 27% of all Tier 4 users create a report - lower than all other tiers (40-43%)
+- In Tiers 1–3, adoption and churn move together; in Tier 4, they diverge among low adoption users
 
 **What This Suggests**
 
@@ -141,8 +141,8 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 ## Key Observations
 
 **Observation 1: Early Feature Adoption Predicts 30-Day Retention**
-- High-adoption users: 16% churn
-- Low-adoption users: 87% churn
+- High adoption users: 16% churn
+- Low adoption users: 87% churn
 - The data shows a strong correlation between multi-feature engagement and staying past day 30
 
 **Observation 2: The Tier 4 Paradox Suggests Contract Structure Matters**
