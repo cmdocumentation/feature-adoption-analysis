@@ -76,10 +76,7 @@ baseline_counts AS (
     step_name,
     count,
     step_order,
-    FIRST_VALUE(count) OVER (
-      PARTITION BY plan_tier
-      ORDER BY step_order
-    ) AS signup_baseline
+    FIRST_VALUE(count) OVER (PARTITION BY plan_tier ORDER BY step_order) AS signup_baseline
   FROM funnel_tallies
 )
 
