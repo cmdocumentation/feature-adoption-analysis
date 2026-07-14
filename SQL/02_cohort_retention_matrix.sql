@@ -1,4 +1,4 @@
--- Query 3: Cohort Retention Matrix  
+-- Query 2: Cohort Retention Matrix  
 -- Output: Retention % by signup week, adoption segment (high/low), and day (7, 30, 60, 90)
 
 WITH user_metrics AS (
