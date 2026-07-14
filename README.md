@@ -1,6 +1,6 @@
 # SaaS Feature Adoption and Churn Analysis
 
-A data analysis portfolio project investigating the relationship between early feature adoption and 30-day user retention in a B2B SaaS product.
+A data analysis portfolio project investigating the relationship between early feature adoption and 30-day user retention in a hypothetical B2B SaaS analytics platform where users create, share, and collaborate on reports.
 
 **Note:** This project uses synthetic data.
 
@@ -8,7 +8,7 @@ A data analysis portfolio project investigating the relationship between early f
 
 **The Business Problem**
 
-A high-growth B2B SaaS company faces a critical question: Why do users churn after 30 days? The hypothesis is straightforward: users who don't adopt core features leave first.
+A high-growth B2B SaaS analytics company faces a critical question: Why do users churn after 30 days? The hypothesis is straightforward: users who don't adopt core features leave first.
 
 ---
 
