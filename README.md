@@ -39,7 +39,7 @@ Data Source: [02_user_adoption_segments_churn.sql](./SQL/02_user_adoption_segmen
 
 ### Cohort Retention Heatmap
 
-Retention rates (day 7→90) for high adoption vs. low adoption cohorts, segmented by signup week.
+Retention rates (day 7→90) for high adoption vs. low adoption cohorts, segmented by signup week. High adopters churn slower than low adopters and the gap widens over time.
 
 ![Cohort Retention Heatmaps](./assets/Cohort_Retention_Heatmaps.png)
 
