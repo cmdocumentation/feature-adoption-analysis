@@ -67,14 +67,23 @@ Data Source: [03_feature_adoption_rates.sql](./SQL/03_feature_adoption_rates.sql
 
 Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
 
-- **users table:** user_id, signup_date, churn_date, plan_tier (1–4), status (active/canceled)
-- **user_events table:** event_id, user_id, event_date, event_type (updated_settings, created_report, ran_dashboard_export, imported_report, applied_filter, invited_team_member, viewed_help_docs)
+- **users table:** `user_id`, `signup_date`, `churn_date`, `plan_tier` (1–4), `status` (active/canceled)
+- **user_events table:** `event_id`, `user_id`, `event_date`, `event_type` (`updated_settings`, `created_report`, `imported_report`, `ran_dashboard_export`, `applied_filter`, `shared_report`, `invited_team_member`)
+
+### Feature Categories
+
+| Feature Category | Actions | Value |
+|---|---|---|
+| Ingestion & Core Value | `imported_report`, `created_report` | User gets data in and generates first insights |
+| Deep Engagement | `applied_filter`, `updated_settings`, `ran_dashboard_export` | User explores, customizes, and extracts value |
+| Collaboration & Amplification | `invited_team_member`, `shared_report` | User multiplies impact by bringing others in |
+
 
 ### SQL (Postgres) Transformation
 
 **Key Metrics**
 
-- **Time-to-Value (TTV):** Days from signup to first core action
+- **Time-to-Value (TTV):** Days from signup to first core action (create report or import report)
 - **Feature Breadth:** Count of distinct features used in first 14 days
 
 **Segmentation Logic**
@@ -82,10 +91,6 @@ Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
 High Adoption = (TTV ≤ 7 days) AND (Feature Breadth ≥ 4 within 14 days)
 Low Adoption = Everyone else
 ```
-Where:
-- Time-to-Value (TTV): days from signup to first core action
-- Feature Breadth: count of distinct core features used within first 14 days of signup
-- Core features: created_report, ran_dashboard_export, imported_report, invited_team_member
 
 ### SQL Techniques
 
@@ -110,7 +115,7 @@ Early feature adoption is a leading indicator of long-term retention in B2B SaaS
 ### Feature Breadth: Count of distinct features used in first 14 days
 
 - Single-feature users rarely stay (they solve one problem and leave)
-- Three features signal genuine product exploration, not accidental discovery
+- Four features signal genuine product exploration, not accidental discovery
 - 14-day window chosen because behavioral patterns stabilize by this point - engagement becomes predictive of sustained platform usage
 
 ## Why Two Conditions Together (AND Logic)
