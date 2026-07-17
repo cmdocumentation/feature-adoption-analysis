@@ -1,3 +1,4 @@
+
 -- Query 1: User Adoption Segments with 30/60/90-Day Churn Rates
 -- Output: Churn rates by plan tier (1-4), adoption segment (high vs. low), and time period (30/60/90 days)
 
@@ -32,7 +33,7 @@ adoption_segments AS (
         signup_date,
         churn_date,
         plan_tier,
-        CASE WHEN time_to_value <= 7 AND feature_breadth >= 4 THEN 'High Adoption' ELSE 'Low Adoption' END AS adoption_segment,
+        CASE WHEN time_to_value IS NULL THEN 'Low Adoption' WHEN time_to_value <= 7 AND feature_breadth >= 4 THEN 'High Adoption' ELSE 'Low Adoption' END AS adoption_segment,
         CASE WHEN churn_date IS NOT NULL AND CAST(churn_date - signup_date AS INTEGER) <= 30 THEN 1 ELSE 0 END AS churned_30,
         CASE WHEN churn_date IS NOT NULL AND CAST(churn_date - signup_date AS INTEGER) > 30 AND CAST(churn_date - signup_date AS INTEGER) <= 60 THEN 1 ELSE 0 END AS churned_60,
         CASE WHEN churn_date IS NOT NULL AND CAST(churn_date - signup_date AS INTEGER) > 60 AND CAST(churn_date - signup_date AS INTEGER) <= 90 THEN 1 ELSE 0 END AS churned_90
@@ -53,4 +54,3 @@ SELECT
 FROM adoption_segments
 GROUP BY adoption_segment, plan_tier
 ORDER BY adoption_segment, plan_tier;
-
