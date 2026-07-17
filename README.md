@@ -83,7 +83,7 @@ Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
 
 **Key Metrics**
 
-- **Time-to-Value (TTV):** Days from signup to first core action (create report or import report)
+- **Time-to-Value (TTV):** Days from signup to first core action (`created_report` or `imported_report`)
 - **Feature Breadth:** Count of distinct features used in first 14 days
 
 **Segmentation Logic**
@@ -145,7 +145,7 @@ This project uses synthetic data. This choice enables demonstration of SQL trans
 Selection effect and contract structure likely explain the divergence. Tier 4 buyers are vetted by sales and contractually committed, so early feature adoption is less predictive of their 30-day churn.
   
 **What This Does NOT Tell Us**
-- Whether Tier 4 customers are *satisfied* (we only see churn, not NPS or renewal intent)
+- Whether Tier 4 customers are satisfied (we only see churn, not NPS or renewal intent)
 - Why adoption is lower (could be onboarding, product fit, or just account maturity stage)
 - Whether this is sustainable (renewal risk may appear later, after the 90-day window)
 
@@ -176,4 +176,4 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 
 ## Repository Structure
 
-The repository includes a synthetic dataset (users.csv, user_events.csv), four SQL (Postgres) queries that calculate adoption segments and retention metrics, and three Tableau visualizations exported as PNGs.
+The repository includes a synthetic dataset (`users.csv`, `user_events.csv`), four SQL (Postgres) queries that calculate adoption segments and retention metrics, and three Tableau visualizations exported as PNGs.
