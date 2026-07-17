@@ -7,7 +7,7 @@ WITH first_core_action AS (
         MIN(ue.event_date) AS first_action_date
     FROM users u
     LEFT JOIN user_events ue ON u.user_id = ue.user_id
-    WHERE ue.event_type IN ('created_report', 'invited_team_member', 'ran_dashboard_export', 'imported_report')
+    WHERE ue.event_type IN ('created_report', 'imported_report')
     GROUP BY u.user_id
 ),
 user_activity_profile AS (
@@ -18,9 +18,11 @@ user_activity_profile AS (
         u.plan_tier,
         u.status,
         CAST(fca.first_action_date - u.signup_date AS INTEGER) AS time_to_value,
-        COUNT(DISTINCT CASE WHEN ue.event_date <= u.signup_date + INTERVAL '14 days' THEN ue.event_type END) AS feature_breadth
+        COUNT(DISTINCT ue.event_type) AS feature_breadth
     FROM users u
     LEFT JOIN user_events ue ON u.user_id = ue.user_id
+        AND ue.event_date <= u.signup_date + INTERVAL '14 days'
+        AND ue.event_type IN ('updated_settings', 'created_report', 'imported_report', 'ran_dashboard_export', 'applied_filter', 'shared_report', 'invited_team_member')
     LEFT JOIN first_core_action fca ON u.user_id = fca.user_id
     GROUP BY u.user_id, u.signup_date, u.churn_date, u.plan_tier, u.status, fca.first_action_date
 ),
@@ -51,3 +53,4 @@ SELECT
 FROM adoption_segments
 GROUP BY adoption_segment, plan_tier
 ORDER BY adoption_segment, plan_tier;
+
