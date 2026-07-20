@@ -65,23 +65,37 @@ Data Source: [03_feature_adoption_rates.sql](./SQL/03_feature_adoption_rates.sql
 
 ### Data Foundation
 
-Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel:
+Synthetic dataset built with [Mockaroo](https://www.mockaroo.com/) and Excel, with all analyses reflecting data through May 28, 2025:
 
 - **users table:** `user_id`, `signup_date`, `churn_date`, `plan_tier` (1–4), `status` (active/canceled)
 - **user_events table:** `event_id`, `user_id`, `event_date`, `event_type` (`created_report`, `imported_report`, `applied_filter`, `updated_settings`, `ran_dashboard_export`, `invited_team_member`, `shared_report`)
 
-### Feature Categories
+### Defining the Metrics
 
-| Feature Category | Actions | Value |
-|---|---|---|
-| Ingestion & Core Value | `created_report`, `imported_report` | User gets data in and generates first insights |
-| Deep Engagement | `applied_filter`, `updated_settings`, `ran_dashboard_export` | User explores, customizes, and extracts value |
-| Collaboration & Amplification | `invited_team_member`, `shared_report` | User multiplies impact by bringing others in |
+Early feature adoption predicts long-term retention in B2B SaaS, but "adoption" is vague without operational definition. This project isolates genuinely engaged users through two signals measured together:
 
+#### Time-to-Value (TTV): Days from Signup to First Core Action
 
-### SQL (Postgres) Transformation
+- Users who reach their first core action within 7 days demonstrate early engagement momentum
+- Beyond 7 days, activation momentum typically diminishes. This aligns with industry benchmarks for onboarding window length.
+- TTV alone doesn't guarantee sustained engagement, but it's a necessary first signal
 
-**Key Metrics**
+#### Feature Breadth: Count of Distinct Features Used in First 14 Days
+
+- Single-feature users rarely stay (they solve one problem and leave)
+- Four features signal genuine product exploration, not accidental discovery
+- 14-day window chosen because behavioral patterns stabilize by this point - engagement becomes predictive of sustained platform usage
+
+#### Why Two Conditions Together (AND Logic)
+
+Each metric alone is incomplete:
+
+- TTV alone misses users who take one action and disappear
+- Breadth alone could reflect accidental clicks rather than intentional exploration
+
+Combined, they isolate users who actively engaged with the product across these two dimensions - not just users who happened to take one action.
+
+### Measurement Framework
 
 - **Time-to-Value (TTV):** Days from signup to first core action (`created_report` or `imported_report`)
 - **Feature Breadth:** Count of distinct features used in first 14 days
@@ -92,44 +106,23 @@ High Adoption = (TTV ≤ 7 days) AND (Feature Breadth ≥ 4 within 14 days)
 Low Adoption = Everyone else
 ```
 
+### Feature Categories
+
+| Feature Category | Actions | Value |
+|---|---|---|
+| Ingestion & Core Value | `created_report`, `imported_report` | User gets data in and generates first insights |
+| Deep Engagement | `applied_filter`, `updated_settings`, `ran_dashboard_export` | User explores, customizes, and extracts value |
+| Collaboration & Amplification | `invited_team_member`, `shared_report` | User multiplies impact by bringing others in |
+
+### Design Choice: Synthetic Data
+
+This project uses synthetic data. This choice enables demonstration of SQL transformation, window functions, and analytical storytelling without proprietary data constraints. The logic and insights generalize to real-world SaaS datasets.
+
 ### SQL Techniques
 
 - **CTEs with JOINs:** Connect user events to signup/churn data for Time-to-Value and feature breadth calculations
 - **Temporal Filtering (JOIN conditions and CASE logic):** Event data constrained to 7-day, 14-day, and 30-day windows post-signup to isolate early engagement signals and measure Time-to-Value and retention patterns
 - **Window Function (FIRST_VALUE):** Establish the signup baseline per tier for adoption rate calculations
-
----
-
-# Design Rationale
-
-## Why These Metrics Matter
-
-Early feature adoption is a leading indicator of long-term retention in B2B SaaS. But "adoption" is vague. This project operationalizes the concept using two measurable signals that together identify genuinely engaged users:
-
-### Time-to-Value (TTV): Days from Signup to First Core Action
-
-- Users who reach their first core action within 7 days demonstrate early engagement momentum
-- Beyond 7 days, activation typically fades. This aligns with industry benchmarks for onboarding window length
-- TTV alone doesn't guarantee sustained engagement, but it's a necessary first signal
-
-### Feature Breadth: Count of Distinct Features Used in First 14 Days
-
-- Single-feature users rarely stay (they solve one problem and leave)
-- Four features signal genuine product exploration, not accidental discovery
-- 14-day window chosen because behavioral patterns stabilize by this point - engagement becomes predictive of sustained platform usage
-
-## Why Two Conditions Together (AND Logic)
-
-Each metric alone is incomplete:
-
-- TTV alone misses users who take one action and disappear
-- Breadth alone could reflect accidental clicks rather than intentional exploration
-
-Combined, they isolate users who actively engaged with the product across these two dimensions - not just users who happened to take one action.
-
-## Design Choice: Synthetic Data
-
-This project uses synthetic data. This choice enables demonstration of SQL transformation, window functions, and analytical storytelling without proprietary data constraints. The logic and insights generalize to real-world SaaS datasets.
 
 ---
 
@@ -142,7 +135,7 @@ This project uses synthetic data. This choice enables demonstration of SQL trans
 
 **What This Suggests**
 
-Selection effect and contract structure likely explain the divergence. Tier 4 buyers are vetted by sales and contractually committed, so early feature adoption is less predictive of their 30-day churn. Additionally, Tier 4 users may prioritize importing existing reports over creating new ones - a more efficient onboarding path that still demonstrates product engagement.
+Selection effect and contract structure likely explain the divergence. Tier 4 buyers are vetted by sales and contractually committed, so early feature adoption is less predictive of their 30-day churn. Additionally, Tier 4 users may prioritize importing existing reports over creating new ones—a more efficient onboarding path that still signals product activation.
   
 **What This Does NOT Tell Us**
 - Whether Tier 4 customers are satisfied (we only see churn, not NPS or renewal intent)
@@ -176,4 +169,4 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 
 ## Repository Structure
 
-The repository includes a synthetic dataset (`users.csv`, `user_events.csv`), four SQL (Postgres) queries that calculate adoption segments and retention metrics, and three Tableau visualizations exported as PNGs.
+The repository includes a synthetic dataset (`users.csv`, `user_events.csv`), three SQL (Postgres) queries that calculate adoption segments and retention metrics, and three Tableau visualizations exported as PNGs.
