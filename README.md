@@ -95,7 +95,7 @@ Low Adoption = Everyone else
 ### SQL Techniques
 
 - **CTEs with JOINs:** Connect user events to signup/churn data for Time-to-Value and feature breadth calculations
-- **Temporal Filtering (JOIN conditions and CASE logic)** Event data constrained to 7-day, 14-day, and 30-day windows post-signup to isolate early engagement signals and measure Time-to-Value and retention patterns
+- **Temporal Filtering (JOIN conditions and CASE logic):** Event data constrained to 7-day, 14-day, and 30-day windows post-signup to isolate early engagement signals and measure Time-to-Value and retention patterns
 - **Window Function (FIRST_VALUE):** Establish the signup baseline per tier for adoption rate calculations
 
 ---
@@ -170,7 +170,7 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 ## Questions for Further Analysis
 
 - Does the Tier 4 churn rate hold after day 90? (Is the paradox short-term or sustained?)
-- How do usage patterns differ between Tier 4 users who created reports (27%) and those who didn't (73%)?
+- Why do Tier 4 users share reports at comparable rates (24%) to lower tiers (20–27%) if they have more mature use cases and team structures? (Shouldn't enterprise users leverage collaboration more heavily?)
 
 ---
 
