@@ -17,7 +17,7 @@ A high-growth B2B SaaS analytics company faces a critical question: Why do users
 | Finding | Insight | Data Impact |
 |---------|---------|-------------|
 | High adoption users churn at 13% (first core action ≤7 days and ≥4 features within 14 days) | Users who engage early and broadly = strong retention signal | Feature adoption is a measurable predictor of 30-day retention |
-| Tier 4 users have 7% low adoption churn and 0% high adoption churn. Yet only 27% ever created a report in their first 30 days (compared to 37-40% for Tiers 1–3). | Enterprise contracts (Tier 4) mask adoption risk: both adoption segments show low 30-day churn, but early adoption still predicts outcome. | Adoption-churn link holds across all tiers, but 30-day churn may be too coarse a metric to detect Tier 4 adoption risk. |
+| Tier 4 users have 7% churn in the low adoption segment and 0% churn in the high adoption segment. Yet only 27% ever created a report in their first 30 days (compared to 37-40% for Tiers 1–3). | Enterprise contracts (Tier 4) mask adoption risk: adoption still predicts churn, but contractual commitment suppresses 30-day signals. | Longer measurement windows (day 90+) are needed to detect Tier 4 retention risk, but the adoption-churn link still holds across all tiers. |
 | Cohort retention stability in high adoption group | High adopters churn slower than low adopters and the gap widens over time | Early feature adoption creates sustained retention |
 | Feature breadth matters more than individual actions | Users who try multiple core features stay longer than single-feature users | Multiple feature adoption is a stronger signal than any single action |
 
