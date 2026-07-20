@@ -51,7 +51,7 @@ Data Source: [02_cohort_retention_matrix.sql](./SQL/02_cohort_retention_matrix.s
 
 Counts and percentage of the total signup cohort that ever successfully activates each feature within 30 days. 
 
-Across all tiers, a maximum of 3% of users invite teammates - a critical gap. Industry benchmarks for B2B collaboration platforms range from 15–25% within 30 days. This suggests the team invitation feature either lacks discovery, doesn't align with user workflows, or users collaborate outside the platform.
+Across all tiers, a maximum of 3% of users invite teammates - a critical gap. This suggests the team invitation feature either lacks discovery, doesn't align with user workflows, or users collaborate outside the platform.
 
 ![Feature Activation Rates by Baseline and Tier](./assets/Feature_Activation_Rates.png)
 
