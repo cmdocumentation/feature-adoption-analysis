@@ -1,14 +1,12 @@
 # SaaS Feature Adoption and Churn Analysis
 
-A data analysis portfolio project investigating the relationship between early feature adoption and 30-day user retention in a hypothetical B2B SaaS analytics platform where users create, share, and collaborate on reports.
+A data analysis portfolio project investigating how early feature adoption predicts 30-day churn across user tiers in a hypothetical B2B SaaS platform built around report creation, sharing, and collaboration.
 
 **Note:** This project uses synthetic data.
 
-## Project Overview
+## The Business Problem
 
-**The Business Problem**
-
-A high-growth B2B SaaS analytics company faces a critical question: Why do users churn after 30 days? The hypothesis is straightforward: users who don't adopt core features leave first.
+A high-growth B2B SaaS analytics company faces a critical question: Why do users churn within 30 days? The hypothesis is straightforward: users who don't adopt core features leave first.
 
 ---
 
@@ -53,7 +51,7 @@ Data Source: [02_cohort_retention_matrix.sql](./SQL/02_cohort_retention_matrix.s
 
 Counts and percentage of the total signup cohort that ever successfully activates each feature within 30 days. 
 
-Across all tiers, a maximum of 3% of cohorts engage with the team member invitation feature.
+Across all tiers, a maximum of 3% of users invite teammates - a critical gap. Industry benchmarks for B2B collaboration platforms range from 15–25% within 30 days. This suggests the team invitation feature either lacks discovery, doesn't align with user workflows, or users collaborate outside the platform.
 
 ![Feature Activation Rates by Baseline and Tier](./assets/Feature_Activation_Rates.png)
 
@@ -78,7 +76,7 @@ Early feature adoption predicts long-term retention in B2B SaaS, but "adoption" 
 
 - Users who reach their first core action within 7 days demonstrate early engagement momentum
 - Beyond 7 days, activation momentum typically diminishes. This aligns with industry benchmarks for onboarding window length.
-- TTV alone doesn't guarantee sustained engagement, but it's a necessary first signal
+- Time-to-Value alone doesn't guarantee sustained engagement, but it's a necessary first signal
 
 #### Feature Breadth: Count of Distinct Features Used in First 14 Days
 
@@ -116,31 +114,13 @@ Low Adoption = Everyone else
 
 ### Design Choice: Synthetic Data
 
-This project uses synthetic data. This choice enables demonstration of SQL transformation, window functions, and analytical storytelling without proprietary data constraints. The logic and insights generalize to real-world SaaS datasets.
+This project uses synthetic data. However, the adoption-churn relationship and tier-based retention patterns reflect patterns observed in real B2B SaaS platforms. The logic and insights generalize to real-world SaaS datasets, enabling demonstration of SQL transformation, window functions, and analytical storytelling without proprietary data constraints.
 
 ### SQL Techniques
 
 - **CTEs with JOINs:** Connect user events to signup/churn data for Time-to-Value and feature breadth calculations
 - **Temporal Filtering (JOIN conditions and CASE logic):** Event data constrained to 7-day, 14-day, and 30-day windows post-signup to isolate early engagement signals and measure Time-to-Value and retention patterns
 - **Window Function (FIRST_VALUE):** Establish the signup baseline per tier for adoption rate calculations
-
----
-
-## The Tier 4 Pattern: Lower Churn Despite Lower Early Adoption
-
-**The Pattern**
-- Tier 4 (enterprise) has the lowest churn rate at 0–7% across both high and low adoption segments
-- Yet only 27% of Tier 4 users create a report in the first 30 days - lower than Tiers 1–3 (37–43%)
-- Tier 4 users show the highest proportion of imported report actions (20%), suggesting a different onboarding pattern
-
-**What This Suggests**
-
-Selection effect and contract structure likely explain the divergence. Tier 4 buyers are vetted by sales and contractually committed, so early feature adoption is less predictive of their 30-day churn. Additionally, Tier 4 users may prioritize importing existing reports over creating new ones—a more efficient onboarding path that still signals product activation.
-  
-**What This Does NOT Tell Us**
-- Whether Tier 4 customers are satisfied (we only see churn, not NPS or renewal intent)
-- Why adoption patterns differ (could be onboarding design, use case fit, or deliberate strategy around importing vs. creating)
-- Whether this is sustainable (renewal risk may appear later, after the 90-day window)
 
 ---
 
@@ -152,8 +132,11 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 - The data shows a strong correlation between multi-feature engagement and staying past day 30
 
 **Observation 2: Contract Structure and Sales Vetting Shape Early Retention**
-- Enterprise customers (Tier 4) show minimal churn (0–7%) regardless of early feature adoption levels.
-- This suggests that sales vetting and contractual commitment reduce churn pressure in the first 30 days, making early feature adoption a weaker retention signal for Tier 4 compared to lower tiers.
+- Tier 4 shows 0–7% churn regardless of adoption levels, versus lower tiers where adoption is predictive
+- Sales vetting and contractual commitment reduce churn pressure in the first 30 days
+- Only 27% of Tier 4 users create a report in the first 30 days - lower than Tiers 1–3 (37–43%)
+- Tier 4 users show the highest proportion of imported report actions (20%), suggesting a different but valid onboarding signal
+- What this doesn't tell us: Whether satisfaction is genuine, why adoption patterns differ, or if renewal risk emerges after 90 days
 
 **Observation 3: Team Adoption Represents a Critical Engagement Gap**
 - A healthy B2B collaboration platform typically achieves 15–25% team adoption within 30 days. This dataset shows minimal viral feature adoption: fewer than 4% of total users across all tiers invite a teammate, suggesting the platform functions primarily as a single-user tool despite higher report-sharing rates (20-27%).
@@ -163,8 +146,16 @@ Selection effect and contract structure likely explain the divergence. Tier 4 bu
 ## Questions for Further Analysis
 
 - Does the Tier 4 churn rate hold after day 90? (Is the paradox short-term or sustained?)
-- Why do Tier 4 users share reports at comparable rates (24%) to lower tiers (20–27%) if they have more mature use cases and team structures? (Shouldn't enterprise users leverage collaboration more heavily?)
+- Enterprise (Tier 4) users create and share reports at healthy rates (27% and 24%), and fewer than 4% invite teammates despite their team structures. This pattern suggests either: (a) team collaboration happens in upstream tools (Slack, email, shared drives) before the platform, or (b) Tier 4 onboarding prioritizes individual power users over cross-functional adoption. Which assumption drives the renewal strategy?
 
+---
+
+## Implications for Product Teams
+
+- For Tier 1–3 users: Feature discovery and breadth are retention levers. Onboarding should surface core features (report creation and filtering) within the first 7 days. 
+- For Tier 4 users: Early adoption signals are muted by contractual commitment, making renewal risk invisible in 30-day windows. The real question isn't 30-day churn - it's whether adoption depth predicts 90-day renewal. 
+- For all tiers: Team features underperform benchmarks. Either the feature is undiscovered, or users have established collaboration workflows outside the platform. This is a discovery problem, not (yet) a feature problem.
+  
 ---
 
 ## Repository Structure
