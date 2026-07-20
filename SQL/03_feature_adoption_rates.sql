@@ -1,4 +1,3 @@
-
 -- Query 3: Feature Adoption Rates 
 -- Measures adoption rates for all 7 product features within a user's first 30 days, broken down by plan tier (1-4), relative to the signed-up baseline.
 
